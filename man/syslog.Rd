@@ -7,7 +7,7 @@
 \title{Write Messages to the System Log}
 \usage{
 open_syslog(name, open_immediately = FALSE, include_pid = FALSE,
-  errors_to_console = FALSE)
+  fallback_to_console = FALSE, echo = FALSE)
 
 syslog(message, level = "INFO")
 
@@ -17,14 +17,19 @@ close_syslog()
 \item{name}{A string identifying the application.}
 
 \item{open_immediately}{When \code{TRUE}, the connection will be opened
-immediately. Otherwise it will be opened when the first message is
-written to the log.}
+immediately (equivalent to using \code{LOG_NDELAY}). Otherwise it will be
+opened when the first message is written to the log (equivalent to using
+\code{LOG_ODELAY}).}
 
 \item{include_pid}{When \code{TRUE}, include the process ID in the log
-message. This may be redundant.}
+message. Equivalent to using \code{LOG_PID}.}
 
-\item{errors_to_console}{Write to the console if there is an error while
-sending to the system logger.}
+\item{fallback_to_console}{Write to the system console (e.g.
+\code{dev/console}) if there is an error while sending to the system
+logger. Equivalent to using \code{LOG_CONS}.}
+
+\item{echo}{Also log the message to standard error. Equivalent to using
+\code{LOG_PERROR}.}
 
 \item{message}{The message to write to the system log.}
 
@@ -35,7 +40,9 @@ priority. See \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-11}{RFC 5
 for the basis of this schema.}
 }
 \description{
-Write messages to the system log via the POSIX syslog interface.
+Write messages to the system log via the POSIX syslog interface. Since this
+is a thin wrapper around that interface, you may also want to take a look at
+\href{man7.org/linux/man-pages/man3/syslog.3.html}{its documentation}.
 }
 \examples{
 \dontrun{

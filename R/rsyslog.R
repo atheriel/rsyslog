@@ -1,15 +1,21 @@
 #' Write Messages to the System Log
 #'
-#' Write messages to the system log via the POSIX syslog interface.
+#' Write messages to the system log via the POSIX syslog interface. Since this
+#' is a thin wrapper around that interface, you may also want to take a look at
+#' \href{man7.org/linux/man-pages/man3/syslog.3.html}{its documentation}.
 #'
 #' @param name A string identifying the application.
 #' @param open_immediately When \code{TRUE}, the connection will be opened
-#'   immediately. Otherwise it will be opened when the first message is
-#'   written to the log.
+#'   immediately (equivalent to using \code{LOG_NDELAY}). Otherwise it will be
+#'   opened when the first message is written to the log (equivalent to using
+#'   \code{LOG_ODELAY}).
 #' @param include_pid When \code{TRUE}, include the process ID in the log
-#'   message. This may be redundant.
-#' @param errors_to_console Write to the console if there is an error while
-#'   sending to the system logger.
+#'   message. Equivalent to using \code{LOG_PID}.
+#' @param fallback_to_console Write to the system console (e.g.
+#'   \code{dev/console}) if there is an error while sending to the system
+#'   logger. Equivalent to using \code{LOG_CONS}.
+#' @param echo Also log the message to standard error. Equivalent to using
+#'   \code{LOG_PERROR}.
 #'
 #' @examples
 #' \dontrun{
@@ -29,12 +35,16 @@
 #' @rdname syslog
 #' @export
 #' @useDynLib rsyslog rsyslog_openlog
-open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE, errors_to_console = FALSE) {
+open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
+                        fallback_to_console = FALSE, echo = FALSE) {
   stopifnot(is.character(name))
   stopifnot(is.logical(open_immediately))
   stopifnot(is.logical(include_pid))
-  stopifnot(is.logical(errors_to_console))
-  .Call(rsyslog_openlog, name, open_immediately, include_pid, errors_to_console)
+  stopifnot(is.logical(fallback_to_console))
+  .Call(
+    rsyslog_openlog, name, open_immediately, include_pid, fallback_to_console,
+    echo
+  )
   invisible(NULL)
 }
 

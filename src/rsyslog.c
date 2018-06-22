@@ -1,6 +1,7 @@
 #include "rsyslog.h"
 
-SEXP rsyslog_openlog(SEXP name, SEXP open_immediately, SEXP include_pid, SEXP errors_to_console) {
+SEXP rsyslog_openlog(SEXP name, SEXP open_immediately, SEXP include_pid,
+                     SEXP fallback_to_console, SEXP echo) {
   const char* ident = CHAR(asChar(name));
   int options = 0;
   if (asLogical(open_immediately)) {
@@ -9,10 +10,12 @@ SEXP rsyslog_openlog(SEXP name, SEXP open_immediately, SEXP include_pid, SEXP er
   if (asLogical(include_pid)) {
     options |= LOG_PID;
   }
-  if (asLogical(errors_to_console)) {
+  if (asLogical(fallback_to_console)) {
     options |= LOG_CONS;
   }
-
+  if (asLogical(echo)) {
+    options |= LOG_PERROR;
+  }
   // NOTE: We could allow customization of facility, but I'm not sure there is
   // a resonable use case.
   openlog(ident, options, LOG_USER);
@@ -33,7 +36,7 @@ SEXP rsyslog_closelog() {
 
 static const R_CallMethodDef rsyslog_entries[] = {
   {"rsyslog_closelog", (DL_FUNC) &rsyslog_closelog, 0},
-  {"rsyslog_openlog", (DL_FUNC) &rsyslog_openlog, 4},
+  {"rsyslog_openlog", (DL_FUNC) &rsyslog_openlog, 5},
   {"rsyslog_syslog", (DL_FUNC) &rsyslog_syslog, 2},
   {NULL, NULL, 0}
 };
