@@ -16,6 +16,9 @@
 #'   logger. Equivalent to using \code{LOG_CONS}.
 #' @param echo Also log the message to standard error. Equivalent to using
 #'   \code{LOG_PERROR}.
+#' @param facility The type of program doing the logging, according to the
+#'   guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
+#'   Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
 #'
 #' @examples
 #' \dontrun{
@@ -36,14 +39,16 @@
 #' @export
 #' @useDynLib rsyslog rsyslog_openlog
 open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
-                        fallback_to_console = FALSE, echo = FALSE) {
+                        fallback_to_console = FALSE, echo = FALSE,
+                        facility = "USER") {
   stopifnot(is.character(name))
   stopifnot(is.logical(open_immediately))
   stopifnot(is.logical(include_pid))
   stopifnot(is.logical(fallback_to_console))
+  facility <- match.arg(facility, names(syslog_facilities))
   .Call(
     rsyslog_openlog, name, open_immediately, include_pid, fallback_to_console,
-    echo
+    echo, syslog_facilities[facility]
   )
   invisible(NULL)
 }
@@ -54,18 +59,25 @@ open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
 #'   \code{"CRITICAL"}, \code{"ALERT"}, or \code{"EMERGE"} -- in that order of
 #'   priority. See \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
 #'   for the basis of this schema.
+#' @param facility The type of program doing the logging, according to the
+#'   guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
+#'   Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
+#'   When this is \code{NULL}, fall back on the default.
 #'
 #' @rdname syslog
 #' @export
 #' @useDynLib rsyslog rsyslog_syslog
-syslog <- function(message, level = "INFO") {
+syslog <- function(message, level = "INFO", facility = NULL) {
   stopifnot(is.character(level))
-  levelno <- syslog_levels[level]
-  if (is.na(levelno)) {
-    stop("Unknown syslog level '", level, "'.")
+  level <- match.arg(level, names(syslog_levels))
+  if (!is.null(facility)) {
+    facility <- match.arg(facility, names(syslog_facilities))
+    facility <- syslog_facilities[facility]
   }
   stopifnot(is.character(message))
-  .Call(rsyslog_syslog, message, levelno)
+  .Call(
+    rsyslog_syslog, message, syslog_levels[level], facility
+  )
   invisible(NULL)
 }
 
@@ -81,4 +93,12 @@ close_syslog <- function() {
 syslog_levels <- c(
   "DEBUG" = 7L, "INFO" = 6L, "NOTICE" = 5L, "WARNING" = 4L, "ERR" = 3L,
   "CRITICAL" = 2L, "ALERT" = 1L, "EMERG" = 0L
+)
+
+# See RFC 5424: https://tools.ietf.org/html/rfc5424#page-10
+syslog_facilities <- c(
+  "KERN" = 0L, "USER" = 1L, "MAIL" = 2L, "DAEMON" = 3L, "AUTH" = 4L,
+  "SYSLOG" = 5L, "LPR" = 6L, "NEWS" = 7L, "UUCP" = 8L, "CRON" = 9L,
+  "AUTHPRIV" = 10L, "FTP" = 11L, "LOCAL0" = 16L, "LOCAL1" = 17L, "LOCAL2" = 18L,
+  "LOCAL3" = 19L, "LOCAL4" = 20L, "LOCAL5" = 21L, "LOCAL6" = 22L, "LOCAL7" = 23L
 )

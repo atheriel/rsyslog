@@ -7,9 +7,9 @@
 \title{Write Messages to the System Log}
 \usage{
 open_syslog(name, open_immediately = FALSE, include_pid = FALSE,
-  fallback_to_console = FALSE, echo = FALSE)
+  fallback_to_console = FALSE, echo = FALSE, facility = "USER")
 
-syslog(message, level = "INFO")
+syslog(message, level = "INFO", facility = NULL)
 
 close_syslog()
 }
@@ -31,6 +31,10 @@ logger. Equivalent to using \code{LOG_CONS}.}
 \item{echo}{Also log the message to standard error. Equivalent to using
 \code{LOG_PERROR}.}
 
+\item{facility}{The type of program doing the logging, according to the
+guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
+Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.}
+
 \item{message}{The message to write to the system log.}
 
 \item{level}{The priority level of the message. One of \code{"DEBUG"},
@@ -38,6 +42,11 @@ logger. Equivalent to using \code{LOG_CONS}.}
 \code{"CRITICAL"}, \code{"ALERT"}, or \code{"EMERGE"} -- in that order of
 priority. See \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
 for the basis of this schema.}
+
+\item{facility}{The type of program doing the logging, according to the
+guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
+Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
+When this is \code{NULL}, fall back on the default.}
 }
 \description{
 Write messages to the system log via the POSIX syslog interface. Since this

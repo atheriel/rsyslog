@@ -3,6 +3,6 @@
 #include <syslog.h>
 
 SEXP rsyslog_openlog(SEXP ident, SEXP open_immediately, SEXP include_pid,
-                     SEXP fallback_to_console, SEXP echo);
-SEXP rsyslog_syslog(SEXP msg, SEXP level);
+                     SEXP fallback_to_console, SEXP echo, SEXP facility);
+SEXP rsyslog_syslog(SEXP msg, SEXP level, SEXP facility);
 SEXP rsyslog_closelog();
