@@ -2,6 +2,7 @@
 
 SEXP rsyslog_openlog(SEXP identifier, SEXP open_immediately, SEXP include_pid,
                      SEXP fallback_to_console, SEXP echo, SEXP facility) {
+#ifdef HAS_SYSLOG
   const char* ident = CHAR(asChar(identifier));
   int options = 0, facility_ = LOG_USER; // The defaults.
   if (asLogical(open_immediately)) {
@@ -21,21 +22,32 @@ SEXP rsyslog_openlog(SEXP identifier, SEXP open_immediately, SEXP include_pid,
   }
 
   openlog(ident, options, facility_);
+#else
+  Rf_error("syslog.h is not available on this platform.");
+#endif
   return R_NilValue;
 }
 
 SEXP rsyslog_syslog(SEXP msg, SEXP level, SEXP facility) {
+#ifdef HAS_SYSLOG
   int priority = asInteger(level);
   if (!isNull(facility)) {
     priority |= (asInteger(facility) << 3);
   }
   const char* msg_ = CHAR(asChar(msg));
   syslog(priority, "%s", msg_);
+#else
+  Rf_error("syslog.h is not available on this platform.");
+#endif
   return R_NilValue;
 }
 
 SEXP rsyslog_closelog() {
+#ifdef HAS_SYSLOG
   closelog();
+#else
+  Rf_error("syslog.h is not available on this platform.");
+#endif
   return R_NilValue;
 }
 
