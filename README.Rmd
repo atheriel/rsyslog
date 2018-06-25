@@ -16,10 +16,23 @@ library(rsyslog)
 
 # `rsyslog`
 
-**rsyslog** is a very simple R package to interface with `syslog` -- a system
-logging interface available on all POSIX-compatible operating systems.
+**rsyslog** is a very simple R package to interface with [syslog](https://en.wikipedia.org/wiki/Syslog) --
+a system logging interface available on all POSIX-compatible operating systems.
+
+## Installation
+
+**rsyslog** is not yet available on CRAN, so for now you'll have to install it
+from GitHub:
+
+```r
+# install.packages("devtools")
+devtools::install_github("atheriel/rsyslog")
+```
 
 ## Usage
+
+Using **rsyslog** closely resembles using the [syslog API](http://man7.org/linux/man-pages/man3/openlog.3.html),
+so it should be familiar if you have previous experience with syslog.
 
 Messages are sent to the system log with the `syslog()` function. You can also
 (optionally) configure how messages are written with `open_syslog()` and close
@@ -30,13 +43,27 @@ open_syslog("my_script")
 syslog("Running script.", level = "INFO")
 syslog("Possible issue.", level = "WARNING")
 close_syslog()
-
-# Opening the syslog is not strictly necessary. You can
-# simply write a message and it will open the log with the
-# process name (likely "R") as the default.
-syslog("Hello from R!", level = "WARNING")
-close_syslog()
 ```
 
-Since `syslog` is such a simple interface, this is actually the entirety of the
-package API.
+To see what this has printed to the system log on `systemd`-based Linux
+distributions (including Ubuntu), you can use the `journalctl` program:
+
+```shell
+$ journalctl --identifier my_script
+```
+
+    -- Logs begin at Mon 2018-06-25 14:48:12 UTC, end at Mon 2018-06-25 15:35:02 UTC. --
+    Jun 25 15:10:18 user my_script[4467]: Running script.
+    Jun 25 15:10:18 user my_script[4467]: Possible issue.
+
+Opening and closing the system log is not strictly necessary (though it is good
+practice). The following will work as well:
+
+```{r brief-example}
+# Uses the process name (likely "R" or "rsession") as the identifier.
+syslog("Hello from R!", level = "WARNING")
+```
+
+## License
+
+The package is licensed under the GPL, version 2 or later.
