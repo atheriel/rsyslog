@@ -1,8 +1,8 @@
 #include "rsyslog.h"
 
-SEXP rsyslog_openlog(SEXP name, SEXP open_immediately, SEXP include_pid,
+SEXP rsyslog_openlog(SEXP identifier, SEXP open_immediately, SEXP include_pid,
                      SEXP fallback_to_console, SEXP echo, SEXP facility) {
-  const char* ident = CHAR(asChar(name));
+  const char* ident = CHAR(asChar(identifier));
   int options = 0, facility_ = LOG_USER; // The defaults.
   if (asLogical(open_immediately)) {
     options |= LOG_NDELAY;

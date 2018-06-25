@@ -6,7 +6,7 @@
 \alias{close_syslog}
 \title{Write Messages to the System Log}
 \usage{
-open_syslog(name, open_immediately = FALSE, include_pid = FALSE,
+open_syslog(identifier, open_immediately = FALSE, include_pid = FALSE,
   fallback_to_console = FALSE, echo = FALSE, facility = NULL)
 
 syslog(message, level = "INFO", facility = NULL)
@@ -14,7 +14,7 @@ syslog(message, level = "INFO", facility = NULL)
 close_syslog()
 }
 \arguments{
-\item{name}{A string identifying the application.}
+\item{identifier}{A string identifying the application.}
 
 \item{open_immediately}{When \code{TRUE}, the connection will be opened
 immediately (equivalent to using \code{LOG_NDELAY}). Otherwise it will be

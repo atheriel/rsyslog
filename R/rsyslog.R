@@ -6,7 +6,7 @@
 #' that neither \code{open_syslog()} nor \code{close_syslog()} is actually
 #' required, but using them is good practice.
 #'
-#' @param name A string identifying the application.
+#' @param identifier A string identifying the application.
 #' @param open_immediately When \code{TRUE}, the connection will be opened
 #'   immediately (equivalent to using \code{LOG_NDELAY}). Otherwise it will be
 #'   opened when the first message is written to the log (equivalent to using
@@ -41,10 +41,10 @@
 #' @rdname syslog
 #' @export
 #' @useDynLib rsyslog rsyslog_openlog
-open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
-                        fallback_to_console = FALSE, echo = FALSE,
-                        facility = NULL) {
-  stopifnot(is.character(name))
+open_syslog <- function(identifier, open_immediately = FALSE,
+                        include_pid = FALSE, fallback_to_console = FALSE,
+                        echo = FALSE, facility = NULL) {
+  stopifnot(is.character(identifier))
   stopifnot(is.logical(open_immediately))
   stopifnot(is.logical(include_pid))
   stopifnot(is.logical(fallback_to_console))
@@ -53,7 +53,7 @@ open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
     facility <- syslog_facilities[facility]
   }
   .Call(
-    rsyslog_openlog, name, open_immediately, include_pid, fallback_to_console,
+    rsyslog_openlog, identifier, open_immediately, include_pid, fallback_to_console,
     echo, facility
   )
   invisible(NULL)
