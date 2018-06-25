@@ -2,7 +2,9 @@
 #'
 #' Write messages to the system log via the POSIX syslog interface. Since this
 #' is a thin wrapper around that interface, you may also want to take a look at
-#' \href{man7.org/linux/man-pages/man3/syslog.3.html}{its documentation}.
+#' \href{man7.org/linux/man-pages/man3/syslog.3.html}{its documentation}. Note
+#' that neither \code{open_syslog()} nor \code{close_syslog()} is actually
+#' required, but using them is good practice.
 #'
 #' @param name A string identifying the application.
 #' @param open_immediately When \code{TRUE}, the connection will be opened
@@ -12,7 +14,7 @@
 #' @param include_pid When \code{TRUE}, include the process ID in the log
 #'   message. Equivalent to using \code{LOG_PID}.
 #' @param fallback_to_console Write to the system console (e.g.
-#'   \code{dev/console}) if there is an error while sending to the system
+#'   \code{/dev/console}) if there is an error while sending to the system
 #'   logger. Equivalent to using \code{LOG_CONS}.
 #' @param echo Also log the message to standard error. Equivalent to using
 #'   \code{LOG_PERROR}.
