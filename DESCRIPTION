@@ -6,11 +6,12 @@ Authors@R: c(
          email = "aaron.jacobs@crescendotechnology.com"),
   person("Crescendo Technology Ltd.", role = "cph")
   )
-Maintainer: Aaron Jacobs <aaron.jacobs@crescendotechnology.com>
-MaintainerSlack: @aaronj
+Maintainer: Aaron Jacobs <atheriel@gmail.com>
 Description: Functions to write messages to the system logger, available on all
   'POSIX'-compatible operating systems.
 License: GPL (>= 2)
+URL: https://github.com/atheriel/rsyslog
+BugReports: https://github.com/atheriel/rsyslog/issues
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
