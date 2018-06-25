@@ -19,6 +19,7 @@
 #' @param facility The type of program doing the logging, according to the
 #'   guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
 #'   Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
+#'   When this is \code{NULL}, fall back on the default.
 #'
 #' @examples
 #' \dontrun{
@@ -40,15 +41,18 @@
 #' @useDynLib rsyslog rsyslog_openlog
 open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
                         fallback_to_console = FALSE, echo = FALSE,
-                        facility = "USER") {
+                        facility = NULL) {
   stopifnot(is.character(name))
   stopifnot(is.logical(open_immediately))
   stopifnot(is.logical(include_pid))
   stopifnot(is.logical(fallback_to_console))
-  facility <- match.arg(facility, names(syslog_facilities))
+  if (!is.null(facility)) {
+    facility <- match.arg(facility, names(syslog_facilities))
+    facility <- syslog_facilities[facility]
+  }
   .Call(
     rsyslog_openlog, name, open_immediately, include_pid, fallback_to_console,
-    echo, syslog_facilities[facility]
+    echo, facility
   )
   invisible(NULL)
 }
@@ -59,10 +63,6 @@ open_syslog <- function(name, open_immediately = FALSE, include_pid = FALSE,
 #'   \code{"CRITICAL"}, \code{"ALERT"}, or \code{"EMERGE"} -- in that order of
 #'   priority. See \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
 #'   for the basis of this schema.
-#' @param facility The type of program doing the logging, according to the
-#'   guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
-#'   Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
-#'   When this is \code{NULL}, fall back on the default.
 #'
 #' @rdname syslog
 #' @export

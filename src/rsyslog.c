@@ -3,7 +3,7 @@
 SEXP rsyslog_openlog(SEXP name, SEXP open_immediately, SEXP include_pid,
                      SEXP fallback_to_console, SEXP echo, SEXP facility) {
   const char* ident = CHAR(asChar(name));
-  int options = 0;
+  int options = 0, facility_ = LOG_USER; // The defaults.
   if (asLogical(open_immediately)) {
     options |= LOG_NDELAY;
   }
@@ -16,8 +16,11 @@ SEXP rsyslog_openlog(SEXP name, SEXP open_immediately, SEXP include_pid,
   if (asLogical(echo)) {
     options |= LOG_PERROR;
   }
+  if (!isNull(facility)) {
+    facility_ = asInteger(facility) << 3;
+  }
 
-  openlog(ident, options, asInteger(facility) << 3);
+  openlog(ident, options, facility_);
   return R_NilValue;
 }
 
