@@ -32,7 +32,7 @@ logger. Equivalent to using \code{LOG_CONS}.}
 \code{LOG_PERROR}.}
 
 \item{facility}{The type of program doing the logging, according to the
-guidelines in \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
+guidelines in \href{https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
 Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
 When this is \code{NULL}, fall back on the default.}
 
@@ -41,7 +41,7 @@ When this is \code{NULL}, fall back on the default.}
 \item{level}{The priority level of the message. One of \code{"DEBUG"},
 \code{"INFO"}, \code{"NOTICE"}, \code{"WARNING"}, \code{"ERR"},
 \code{"CRITICAL"}, \code{"ALERT"}, or \code{"EMERGE"} -- in that order of
-priority. See \href{RFC 5424: https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
+priority. See \href{https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
 for the basis of this schema.}
 }
 \description{
