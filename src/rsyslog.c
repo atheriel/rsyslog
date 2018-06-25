@@ -51,10 +51,21 @@ SEXP rsyslog_closelog() {
   return R_NilValue;
 }
 
+SEXP rsyslog_setlogmask(SEXP level) {
+#ifdef HAS_SYSLOG
+  int priority = asInteger(level);
+  setlogmask(LOG_UPTO(priority));
+#else
+  Rf_error("syslog.h is not available on this platform.");
+#endif
+  return R_NilValue;
+}
+
 static const R_CallMethodDef rsyslog_entries[] = {
-  {"rsyslog_closelog", (DL_FUNC) &rsyslog_closelog, 0},
   {"rsyslog_openlog", (DL_FUNC) &rsyslog_openlog, 6},
   {"rsyslog_syslog", (DL_FUNC) &rsyslog_syslog, 3},
+  {"rsyslog_closelog", (DL_FUNC) &rsyslog_closelog, 0},
+  {"rsyslog_setlogmask", (DL_FUNC) &rsyslog_setlogmask, 1},
   {NULL, NULL, 0}
 };
 

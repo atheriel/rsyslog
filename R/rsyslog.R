@@ -91,6 +91,36 @@ close_syslog <- function() {
   invisible(NULL)
 }
 
+#' Set the System Log Priority Mask
+#'
+#' \code{set_syslog_mask} can be used to prevent messages below a priority
+#' level from being written to the system log.
+#'
+#' @param level Mask (hide) messages below this priority level. One of
+#'   \code{"DEBUG"}, \code{"INFO"}, \code{"NOTICE"}, \code{"WARNING"},
+#'   \code{"ERR"}, \code{"CRITICAL"}, or \code{"ALERT"} -- in that order of
+#'   priority. See \href{https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
+#'   for the basis of this schema.
+#'
+#' @examples
+#' \dontrun{
+#' open_syslog("my_script")
+#' syslog("This message is visible.", level = "INFO")
+#' set_syslog_mask("WARNING")
+#' syslog("No longer visible.", level = "INFO")
+#' syslog("Still visible.", level = "WARNING")
+#' close_syslog()
+#' }
+#'
+#' @export
+#' @useDynLib rsyslog rsyslog_setlogmask
+set_syslog_mask <- function(level) {
+  stopifnot(is.character(level))
+  level <- match.arg(level, names(syslog_levels))
+  .Call(rsyslog_setlogmask, syslog_levels[level])
+  invisible(NULL)
+}
+
 # See RFC 5424: https://tools.ietf.org/html/rfc5424#page-11
 syslog_levels <- c(
   "DEBUG" = 7L, "INFO" = 6L, "NOTICE" = 5L, "WARNING" = 4L, "ERR" = 3L,

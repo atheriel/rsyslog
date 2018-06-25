@@ -46,6 +46,17 @@ Opening and closing the system log is not strictly necessary (though it is good 
 syslog("Hello from R!", level = "WARNING")
 ```
 
+If you wish to control the visibility of messages by priority level (for example, to hide debug messages), use `set_syslog_mask()`:
+
+``` r
+open_syslog("my_script")
+syslog("This message is visible.", level = "INFO")
+set_syslog_mask("WARNING")
+syslog("No longer visible.", level = "INFO")
+syslog("Still visible.", level = "WARNING")
+close_syslog()
+```
+
 License
 -------
 

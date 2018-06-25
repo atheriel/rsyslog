@@ -2,7 +2,9 @@
 
 export(close_syslog)
 export(open_syslog)
+export(set_syslog_mask)
 export(syslog)
 useDynLib(rsyslog,rsyslog_closelog)
 useDynLib(rsyslog,rsyslog_openlog)
+useDynLib(rsyslog,rsyslog_setlogmask)
 useDynLib(rsyslog,rsyslog_syslog)
