@@ -1,19 +1,16 @@
 ## Release Summary
 
-This is a new submission.
+This is a bugfix release. On some platforms (notably Solaris), the `LOG_PERROR`
+symbol is not defined in `syslog.h`, which would cause compilation to fail.
+This is no longer the case.
+
+In additon, using `LOG_PERROR` functionality on those platforms will now issue
+a warning.
 
 ## Test Environments
 
 * ubuntu 16.04, R 3.4.4
 * win-builder (devel)
-
-Note that while the package will compile on Windows, it won't actually do
-anything, because Windows does not support the POSIX syslog API. Instead it
-will surface an error to the user if they try to call any of the functions.
-
-The `SystemRequirements` field in the DESCRIPTION file also lists
-"POSIX.1-2001" to indicate this dependency, and the `OS_type` is "unix" as
-well.
 
 ## R CMD check Results
 
@@ -24,7 +21,7 @@ There was 1 NOTE:
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Aaron Jacobs <atheriel@gmail.com>'
 
-New submission
+Days since last update: 1
 
 ## Downstream Dependencies
 
