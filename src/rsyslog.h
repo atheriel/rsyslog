@@ -3,6 +3,7 @@
 
 // syslog.h is not usually available on Windows.
 #ifndef _WIN32
+#define _XOPEN_SOURCE 600 // Declare the need for POSIX.1-2001 functions.
 #include <syslog.h>
 #define HAS_SYSLOG
 #endif

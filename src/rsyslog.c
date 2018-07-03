@@ -15,7 +15,12 @@ SEXP rsyslog_openlog(SEXP identifier, SEXP open_immediately, SEXP include_pid,
     options |= LOG_CONS;
   }
   if (asLogical(echo)) {
+#ifdef LOG_PERROR
     options |= LOG_PERROR;
+#else
+    Rf_warning("Cannot echo syslog messages to standard error: LOG_PERROR is \
+not available on this platform.");
+#endif
   }
   if (!isNull(facility)) {
     facility_ = asInteger(facility) << 3;

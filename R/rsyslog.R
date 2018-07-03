@@ -17,7 +17,9 @@
 #'   \code{/dev/console}) if there is an error while sending to the system
 #'   logger. Equivalent to using \code{LOG_CONS}.
 #' @param echo Also log the message to standard error. Equivalent to using
-#'   \code{LOG_PERROR}.
+#'   \code{LOG_PERROR}. Note that this is not actually part of the POSIX
+#'   specification, and may not be available on your platform. If that is the
+#'   case, setting this to \code{TRUE} will generate a warning.
 #' @param facility The type of program doing the logging, according to the
 #'   guidelines in \href{https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
 #'   Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
