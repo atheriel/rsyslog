@@ -1,14 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
-`rsyslog`
-=========
+rsyslog
+=======
+
+[![CRAN status](http://www.r-pkg.org/badges/version/rsyslog)](https://cran.r-project.org/package=rsyslog)
 
 **rsyslog** is a very simple R package to interface with [syslog](https://en.wikipedia.org/wiki/Syslog) -- a system logging interface available on all POSIX-compatible operating systems.
 
 Installation
 ------------
 
-**rsyslog** is not yet available on CRAN, so for now you'll have to install it from GitHub:
+To get the latest stable version from CRAN:
+
+``` r
+install.packages("rsyslog")
+```
+
+If you need access to in-development features, you can install the package directly from GitHub:
 
 ``` r
 # install.packages("devtools")
