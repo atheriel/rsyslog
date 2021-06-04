@@ -6,8 +6,14 @@
 \alias{close_syslog}
 \title{Write Messages to the System Log}
 \usage{
-open_syslog(identifier, open_immediately = FALSE, include_pid = FALSE,
-  fallback_to_console = FALSE, echo = FALSE, facility = NULL)
+open_syslog(
+  identifier,
+  open_immediately = FALSE,
+  include_pid = FALSE,
+  fallback_to_console = FALSE,
+  echo = FALSE,
+  facility = NULL
+)
 
 syslog(message, level = "INFO", facility = NULL)
 

@@ -16,5 +16,5 @@ URL: https://github.com/atheriel/rsyslog
 BugReports: https://github.com/atheriel/rsyslog/issues
 Encoding: UTF-8
 OS_type: unix
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 SystemRequirements: POSIX.1-2001
