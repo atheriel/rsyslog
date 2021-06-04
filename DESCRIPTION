@@ -14,9 +14,7 @@ Description: Functions to write messages to the 'syslog' system logger API,
 License: GPL (>= 2)
 URL: https://github.com/atheriel/rsyslog
 BugReports: https://github.com/atheriel/rsyslog/issues
-ByteCompile: true
 Encoding: UTF-8
-LazyData: true
 OS_type: unix
 RoxygenNote: 6.0.1
 SystemRequirements: POSIX.1-2001
