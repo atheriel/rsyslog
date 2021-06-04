@@ -2,9 +2,9 @@
 #'
 #' Write messages to the system log via the POSIX syslog interface. Since this
 #' is a thin wrapper around that interface, you may also want to take a look at
-#' \href{man7.org/linux/man-pages/man3/syslog.3.html}{its documentation}. Note
-#' that neither \code{open_syslog()} nor \code{close_syslog()} is actually
-#' required, but using them is good practice.
+#' \href{https://man7.org/linux/man-pages/man3/syslog.3.html}{its
+#' documentation}. Note that neither \code{open_syslog()} nor
+#' \code{close_syslog()} is actually required, but using them is good practice.
 #'
 #' @param identifier A string identifying the application.
 #' @param open_immediately When \code{TRUE}, the connection will be opened
