@@ -1,28 +1,18 @@
 ## Release Summary
 
-This is a bugfix release. On some platforms (notably Solaris), the `LOG_PERROR`
-symbol is not defined in `syslog.h`, which would cause compilation to fail.
-This is no longer the case.
+This is a resubmission. It fixes an invalid URL in the README.
 
-In additon, using `LOG_PERROR` functionality on those platforms will now issue
-a warning.
+This release contains no functional changes. It removes the `LazyData` field
+from the `DESCRIPTION` file, which was generating a NOTE in CRAN's automated
+checking, and URLs in the help files and README.
 
 ## Test Environments
 
-* ubuntu 16.04, R 3.4.4
-* win-builder (devel)
+- R-hub debian-gcc-release (r-release)
+- R-hub ubuntu-gcc-release (r-release)
+- R-hub fedora-clang-devel (r-devel)
+- win-builder (r-devel)
 
 ## R CMD check Results
 
-There were no ERRORs or WARNINGs.
-
-There was 1 NOTE:
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Aaron Jacobs <atheriel@gmail.com>'
-
-Days since last update: 1
-
-## Downstream Dependencies
-
-There are currently no downstream dependencies for this package.
+0 errors | 0 warnings | 0 notes
