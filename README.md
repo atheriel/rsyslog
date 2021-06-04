@@ -26,7 +26,7 @@ devtools::install_github("atheriel/rsyslog")
 Usage
 -----
 
-Using **rsyslog** closely resembles using the [syslog API](http://man7.org/linux/man-pages/man3/openlog.3.html), so it should be familiar if you have previous experience with syslog.
+Using **rsyslog** closely resembles using the [syslog API](https://man7.org/linux/man-pages/man3/openlog.3.html), so it should be familiar if you have previous experience with syslog.
 
 Messages are sent to the system log with the `syslog()` function. You can also (optionally) configure how messages are written with `open_syslog()` and close any open connection with `close_syslog()`.
 
