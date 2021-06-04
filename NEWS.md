@@ -1,4 +1,4 @@
-# rsyslog 1.0.1.9000
+# rsyslog 1.0.2
 
 * Removes the `LazyData` field from the `DESCRIPTION` file, which was generating
   a NOTE in CRAN's automated checking.
