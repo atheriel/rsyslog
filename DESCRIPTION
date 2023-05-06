@@ -1,6 +1,6 @@
 Package: rsyslog
 Title: Interface to the 'syslog' System Logger
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
   person("Aaron", "Jacobs", role = c("aut", "cre"),
          email = "atheriel@gmail.com"),
