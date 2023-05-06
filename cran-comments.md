@@ -1,17 +1,15 @@
 ## Release Summary
 
-This is a resubmission. It fixes an invalid URL in the README.
-
-This release contains no functional changes. It removes the `LazyData` field
-from the `DESCRIPTION` file, which was generating a NOTE in CRAN's automated
-checking, and URLs in the help files and README.
+This release is to restore the pacakge to CRAN, and contains no functional
+changes. It fixes warnings surfaced by `-Wstrict-prototypes` and notes about URL
+redirects.
 
 ## Test Environments
 
-- R-hub debian-gcc-release (r-release)
+- R-hub windows-x86_64-devel (r-devel)
 - R-hub ubuntu-gcc-release (r-release)
 - R-hub fedora-clang-devel (r-devel)
-- win-builder (r-devel)
+- R-hub linux-x86_64-rocker-gcc-san (r-devel)
 
 ## R CMD check Results
 
