@@ -21,7 +21,7 @@
 #'   specification, and may not be available on your platform. If that is the
 #'   case, setting this to \code{TRUE} will generate a warning.
 #' @param facility The type of program doing the logging, according to the
-#'   guidelines in \href{https://tools.ietf.org/html/rfc5424#page-10}{RFC 5424}.
+#'   guidelines in \href{https://datatracker.ietf.org/doc/html/rfc5424#page-10}{RFC 5424}.
 #'   Generally one of \code{"USER"} or \code{"LOCAL0"} through \code{"LOCAL7"}.
 #'   When this is \code{NULL}, fall back on the default.
 #'
@@ -65,7 +65,7 @@ open_syslog <- function(identifier, open_immediately = FALSE,
 #' @param level The priority level of the message. One of \code{"DEBUG"},
 #'   \code{"INFO"}, \code{"NOTICE"}, \code{"WARNING"}, \code{"ERR"},
 #'   \code{"CRITICAL"}, \code{"ALERT"}, or \code{"EMERGE"} -- in that order of
-#'   priority. See \href{https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
+#'   priority. See \href{https://datatracker.ietf.org/doc/html/rfc5424#page-11}{RFC 5424}
 #'   for the basis of this schema.
 #'
 #' @rdname syslog
@@ -101,7 +101,7 @@ close_syslog <- function() {
 #' @param level Mask (hide) messages below this priority level. One of
 #'   \code{"DEBUG"}, \code{"INFO"}, \code{"NOTICE"}, \code{"WARNING"},
 #'   \code{"ERR"}, \code{"CRITICAL"}, or \code{"ALERT"} -- in that order of
-#'   priority. See \href{https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
+#'   priority. See \href{https://datatracker.ietf.org/doc/html/rfc5424#page-11}{RFC 5424}
 #'   for the basis of this schema.
 #'
 #' @examples
@@ -123,13 +123,13 @@ set_syslog_mask <- function(level) {
   invisible(NULL)
 }
 
-# See RFC 5424: https://tools.ietf.org/html/rfc5424#page-11
+# See RFC 5424: https://datatracker.ietf.org/doc/html/rfc5424#page-11
 syslog_levels <- c(
   "DEBUG" = 7L, "INFO" = 6L, "NOTICE" = 5L, "WARNING" = 4L, "ERR" = 3L,
   "CRITICAL" = 2L, "ALERT" = 1L, "EMERG" = 0L
 )
 
-# See RFC 5424: https://tools.ietf.org/html/rfc5424#page-10
+# See RFC 5424: https://datatracker.ietf.org/doc/html/rfc5424#page-10
 syslog_facilities <- c(
   "KERN" = 0L, "USER" = 1L, "MAIL" = 2L, "DAEMON" = 3L, "AUTH" = 4L,
   "SYSLOG" = 5L, "LPR" = 6L, "NEWS" = 7L, "UUCP" = 8L, "CRON" = 9L,

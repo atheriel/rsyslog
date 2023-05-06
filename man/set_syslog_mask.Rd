@@ -10,7 +10,7 @@ set_syslog_mask(level)
 \item{level}{Mask (hide) messages below this priority level. One of
 \code{"DEBUG"}, \code{"INFO"}, \code{"NOTICE"}, \code{"WARNING"},
 \code{"ERR"}, \code{"CRITICAL"}, or \code{"ALERT"} -- in that order of
-priority. See \href{https://tools.ietf.org/html/rfc5424#page-11}{RFC 5424}
+priority. See \href{https://datatracker.ietf.org/doc/html/rfc5424#page-11}{RFC 5424}
 for the basis of this schema.}
 }
 \description{

@@ -1,6 +1,7 @@
 # rsyslog 1.0.2.9000
 
 * Fixes compiler warnings on CRAN surfaced by `-Wstrict-prototypes`.
+* Fixes URL warnings on CRAN due to redirects.
 
 # rsyslog 1.0.2
 
