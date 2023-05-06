@@ -47,7 +47,7 @@ SEXP rsyslog_syslog(SEXP msg, SEXP level, SEXP facility) {
   return R_NilValue;
 }
 
-SEXP rsyslog_closelog() {
+SEXP rsyslog_closelog(void) {
 #ifdef HAS_SYSLOG
   closelog();
 #else

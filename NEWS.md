@@ -1,3 +1,7 @@
+# rsyslog 1.0.2.9000
+
+* Fixes compiler warnings on CRAN surfaced by `-Wstrict-prototypes`.
+
 # rsyslog 1.0.2
 
 * Removes the `LazyData` field from the `DESCRIPTION` file, which was generating
